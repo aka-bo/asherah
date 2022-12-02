@@ -1,0 +1,55 @@
+{
+	"name": "Java",
+	"image": "mcr.microsoft.com/devcontainers/java:11",
+	"features": {
+		"ghcr.io/devcontainers/features/java:1": {
+			"version": "11",
+            "jdkDistro": "open",
+			"installMaven": "true",
+			"installGradle": "false"
+		},
+        "ghcr.io/devcontainers/features/docker-in-docker:1": {
+            "version": "latest",
+            "moby": "true"
+        },
+		"ghcr.io/devcontainers/features/node:1": {
+			"version": "latest"
+		},
+		"ghcr.io/devcontainers/features/dotnet:1": {
+            "version": "latest"
+        },
+		"ghcr.io/devcontainers/features/go:1": {
+            "version": "1.19",
+            "golangciLintVersion": "latest"
+        },
+		"ghcr.io/guiyomh/features/gotestsum:0": {
+            "version": "latest"
+        }
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "java -version",
+
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"lfs.vscode-emacs-friendly",
+				"ms-vscode.cpptools"
+			]
+		}
+	},
+
+	"runArgs": ["--ulimit=core=-1", "--ulimit=memlock=-1:-1", "--cpus=2"],
+
+	"containerEnv": {
+		"AWS_ACCESS_KEY_ID": "dummy",
+        "AWS_SECRET_ACCESS_KEY": "dummy"
+	}
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}
