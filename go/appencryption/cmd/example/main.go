@@ -22,7 +22,6 @@ import (
 	smlog "github.com/godaddy/asherah/go/securememory/log"
 	"github.com/godaddy/asherah/go/securememory/memguard"
 	"github.com/jessevdk/go-flags"
-	"github.com/logrusorgru/aurora"
 	"github.com/pkg/errors"
 	"github.com/rcrowley/go-metrics"
 
@@ -88,10 +87,18 @@ func (f loggerFunc) Debugf(format string, v ...interface{}) {
 func EncryptAndStore(s *appencryption.Session, b []byte) *appencryption.DataRowRecord {
 	dr, err := s.Encrypt(context.Background(), b)
 	if err != nil {
+		printEndMetrics()
 		panic(err)
 	}
 
 	return dr
+}
+
+func printEndMetrics() {
+	log.Printf(
+		"[final] secrets: allocs=%d, inuse=%d\n",
+		securememory.AllocCounter.Count(),
+		securememory.InUseCounter.Count())
 }
 
 func GenerateData(session *appencryption.Session, count int) []appencryption.DataRowRecord {
@@ -127,6 +134,7 @@ func GenerateData(session *appencryption.Session, count int) []appencryption.Dat
 func Decrypt(session *appencryption.Session, drr appencryption.DataRowRecord) {
 	result, err := session.Decrypt(context.Background(), drr)
 	if err != nil {
+		printEndMetrics()
 		panic(err)
 	}
 
@@ -155,10 +163,7 @@ func main() {
 	}
 
 	if opts.Verbose && len(f) > 0 {
-		fmt.Println(aurora.Cyan("Flags:"))
-		for _, flagV := range f {
-			fmt.Println(flagV)
-		}
+		PrintFlags(f)
 	}
 
 	if opts.Profile == "http" {

@@ -6,10 +6,10 @@ require (
 	github.com/TylerBrock/colorjson v0.0.0-20200706003622-8a50f05110d2
 	github.com/aws/aws-sdk-go v1.44.265
 	github.com/go-sql-driver/mysql v1.7.0
-	github.com/godaddy/asherah/go/appencryption v0.2.6
+	github.com/godaddy/asherah/go/appencryption v0.3.0
 	github.com/godaddy/asherah/go/securememory v0.1.4
 	github.com/jessevdk/go-flags v1.5.0
-	github.com/logrusorgru/aurora v2.0.3+incompatible
+	github.com/logrusorgru/aurora/v4 v4.0.0
 	github.com/pkg/errors v0.9.1
 	github.com/rcrowley/go-metrics v0.0.0-20201227073835-cf1acfcdf475
 )

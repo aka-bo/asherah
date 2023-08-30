@@ -11,7 +11,7 @@ import (
 	"time"
 
 	"github.com/TylerBrock/colorjson"
-	"github.com/logrusorgru/aurora"
+	"github.com/logrusorgru/aurora/v4"
 	"github.com/rcrowley/go-metrics"
 )
 
@@ -67,6 +67,13 @@ func PrintColoredJSON(msg string, obj interface{}) {
 
 func PrintTitle(name string) {
 	fmt.Fprintln(w, aurora.Bold(TitleColor(name)))
+}
+
+func PrintFlags(f []string) {
+	fmt.Println(aurora.Cyan("Flags:"))
+	for _, flagV := range f {
+		fmt.Println(flagV)
+	}
 }
 
 func Print(name string, v1 interface{}) {
